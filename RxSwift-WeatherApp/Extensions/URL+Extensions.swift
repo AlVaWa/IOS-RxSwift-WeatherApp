@@ -11,7 +11,11 @@ import Foundation
 extension URL {
     
     static func urlForWeatherAPI(city: String) -> URL? {
-        return URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&APPID=83750e57616d8f55870e60ae1433a667&units=metric")
+        if let apiKey = ProcessInfo.processInfo.environment["WeatherAPIKey"] {
+            return URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&APPID=\(apiKey)&units=metric")
+        } else {
+            return nil
+        }
     }
     
 }
